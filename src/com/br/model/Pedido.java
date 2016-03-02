@@ -1,4 +1,4 @@
-package com.br.entity;
+package com.br.model;
 
 import java.util.Collection;
 import java.util.Date;

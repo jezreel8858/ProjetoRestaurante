@@ -8,15 +8,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.br.entity.Cliente;
 import com.br.exception.LoginExistenteException;
+import com.br.model.Cliente;
 
-public class ClienteDaO {
+public class ClienteDAO {
 	
 	EntityManagerFactory factory = null;
 	EntityManager em = null;
 	
-	public ClienteDaO(){
+	public ClienteDAO(){
 		factory = Persistence.createEntityManagerFactory("projeto");
 		em = factory.createEntityManager();
 	}

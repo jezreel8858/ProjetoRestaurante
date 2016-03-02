@@ -7,9 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.br.controller.ClienteController;
-import com.br.entity.Cliente;
-import com.br.entity.Endereco;
-import com.br.entity.Pedido;
+import com.br.model.Cliente;
+import com.br.model.Endereco;
+import com.br.model.Pedido;
 
 public class Main {
 
