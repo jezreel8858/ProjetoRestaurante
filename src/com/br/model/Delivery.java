@@ -1,6 +1,7 @@
 package com.br.model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -8,6 +9,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Delivery extends Pedido {
 
 	private float troco;
+
+	@ManyToOne
+	private Cliente cliente;
 	
 	public float getTroco() {
 		return troco;
