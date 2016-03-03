@@ -4,15 +4,15 @@ package com.br.controller;
 
 import java.util.List;
 
-import com.br.dao.ClienteDaO;
-import com.br.entity.Cliente;
+import com.br.dao.ClienteDAO;
+import com.br.model.Cliente;
 
 public class ClienteController {
 
-	private ClienteDaO clienteDao = null;
+	private ClienteDAO clienteDao = null;
 	
 	public ClienteController(){
-		clienteDao = new ClienteDaO();
+		clienteDao = new ClienteDAO();
 	}
 	
 	public void cadastrarCliente(Cliente cliente){

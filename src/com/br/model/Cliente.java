@@ -1,4 +1,4 @@
-package com.br.entity;
+package com.br.model;
 
 import java.util.Collection;
 import java.util.Date;
@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
@@ -28,12 +26,11 @@ public class Cliente extends Usuario {
 	
 	@Embedded
 	private Endereco endereco;
-	
 
-	@OneToMany
-	@JoinTable(name="Cli_Deliv",
-				joinColumns=@JoinColumn(name="Cli_Id"),
-				inverseJoinColumns=@JoinColumn(name="Deliv_Id"))
+	@OneToMany(mappedBy="cliente")
+//	@JoinTable(name="Cli_Deliv",
+//				joinColumns=@JoinColumn(name="Cli_Id"),
+//				inverseJoinColumns=@JoinColumn(name="Deliv_Id"))
 	private Collection<Delivery> deliverys;
 	
 

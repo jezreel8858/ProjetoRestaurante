@@ -1,4 +1,4 @@
-package com.br.entity;
+package com.br.model;
 
 import java.util.Collection;
 
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,8 +26,9 @@ public class Loja {
 	
 
 	@OneToMany
-	@JoinTable(name="Loja_Ped",
-				joinColumns=@JoinColumn(name="Loja_Id"),
-				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
+//	@JoinTable(name="Loja_Ped",
+//				joinColumns=@JoinColumn(name="Loja_Id"),
+//				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
+	@JoinColumn(name="loja_id")
 	private Collection<Pedido> pedidos;
 }

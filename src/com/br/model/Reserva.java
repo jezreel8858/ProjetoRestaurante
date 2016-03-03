@@ -1,4 +1,4 @@
-package com.br.entity;
+package com.br.model;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,13 +18,13 @@ public class Reserva {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date _dataReserva;
+	private Date dataReserva;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date _dataMarcada;			
+	private Date dataMarcada;			
 	@Column(nullable=false)
-	private int _nPessoas;			// Numero de pessoas para reserva
+	private int nPessoas;			// Numero de pessoas para reserva
 	@Column(nullable=false)
-	private	String _nomeResp;  		// Nome do Responsavel
+	private	String nomeResp;  		// Nome do Responsavel
 	
 	@ManyToOne
 	@JoinColumn(name="fun_id")
@@ -41,28 +41,28 @@ public class Reserva {
 		this.id = id;
 	}
 	public Date get_dataReserva() {
-		return _dataReserva;
+		return dataReserva;
 	}
-	public void set_dataReserva(Date _dataReserva) {
-		this._dataReserva = _dataReserva;
+	public void set_dataReserva(Date dataReserva) {
+		this.dataReserva = dataReserva;
 	}
 	public Date get_dataMarcada() {
-		return _dataMarcada;
+		return dataMarcada;
 	}
-	public void set_dataMarcada(Date _dataMarcada) {
-		this._dataMarcada = _dataMarcada;
+	public void set_dataMarcada(Date dataMarcada) {
+		this.dataMarcada = dataMarcada;
 	}
 	public int get_nPessoas() {
-		return _nPessoas;
+		return nPessoas;
 	}
-	public void set_nPessoas(int _nPessoas) {
-		this._nPessoas = _nPessoas;
+	public void set_nPessoas(int nPessoas) {
+		this.nPessoas = nPessoas;
 	}
 	public String get_nomeResp() {
-		return _nomeResp;
+		return nomeResp;
 	}
-	public void set_nomeResp(String _nomeResp) {
-		this._nomeResp = _nomeResp;
+	public void set_nomeResp(String nomeResp) {
+		this.nomeResp = nomeResp;
 	}
 	
 }

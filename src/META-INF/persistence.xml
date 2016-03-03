@@ -4,32 +4,28 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence               
                         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	<persistence-unit name="projeto" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>com.br.entity.Cliente</class>
-		<class>com.br.entity.Cardapio</class>
-		<class>com.br.entity.Categoria</class>
-		<class>com.br.entity.Pedido</class>
-		<class>com.br.entity.ItemCardapio</class>
-		<class>com.br.entity.Endereco</class>
-		<class>com.br.entity.Funcionario</class>
-		<class>com.br.entity.Loja</class>
-		<class>com.br.entity.Mesa</class>
-		<class>com.br.entity.Reserva</class>
-		<class>com.br.entity.Tradicional</class>		
-		<class>com.br.entity.Delivery</class>
-		<class>com.br.entity.Usuario</class>
-		 <exclude-unlisted-classes>true</exclude-unlisted-classes>
-		 
-		<properties>
-		
-		
+	<persistence-unit name="projetoSQLServer" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>		 
+		<properties>	
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.connection.driver" value="net.sourceforge.jtds.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="sa" />
 			<property name="hibernate.connection.password" value="123456789" />
 			<property name="hibernate.connection.url" value="jdbc:sqlserver://localhost:1433;databaseName=Restaurante" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	<persistence-unit name="projetoPostgres" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>		 
+		<properties>	
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+			<property name="hibernate.connection.username" value="postgres" />
+			<property name="hibernate.connection.password" value="postgres" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5433/restaurante" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>

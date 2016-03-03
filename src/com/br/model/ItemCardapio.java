@@ -1,4 +1,4 @@
-package com.br.entity;
+package com.br.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,11 +20,14 @@ public class ItemCardapio {
 	private int qtd;
 	
 	@ManyToOne
-	@JoinColumn(name="ped_id")
+	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JoinColumn(name="card_id")
+	//@JoinTable(name="item_card",
+	//	joinColumns=@JoinColumn(name="item_id"),
+	//	inverseJoinColumns=@JoinColumn(name="cardapio_id"))
+	@JoinColumn(name="item_id")
 	private Cardapio cardapio;
 	
 	public Long getId() {

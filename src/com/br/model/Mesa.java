@@ -1,14 +1,12 @@
-package com.br.entity;
+package com.br.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,18 +19,16 @@ public class Mesa {
 	@Column(nullable=false)
 	private int capacidade;
 	
-	@OneToMany
-	@JoinTable(name="Mesa_Reserv",
-				joinColumns=@JoinColumn(name="Mesa_Id"),
-				inverseJoinColumns=@JoinColumn(name="Reserv_Id"))
-	private Collection<Reserva> reservas;
+	@OneToMany(mappedBy="mesa")
+//	@JoinTable(name="Mesa_Reserv",
+//				joinColumns=@JoinColumn(name="Mesa_Id"),
+//				inverseJoinColumns=@JoinColumn(name="Reserv_Id"))
+	private List<Reserva> reservas;
 	
 
-	@OneToMany
-	@JoinTable(name="Mesa_Trad",
-				joinColumns=@JoinColumn(name="Mesa_Id"),
-				inverseJoinColumns=@JoinColumn(name="Trad_Id"))
-	private Collection<Tradicional> tradicionais;
+	@OneToMany(mappedBy="mesa")
+	private List<Tradicional> tradicionais;
+	
 	public Long getId() {
 		return id;
 	}

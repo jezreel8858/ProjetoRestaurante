@@ -1,15 +1,10 @@
-package com.br.entity;
-
-import java.util.Collection;
+package com.br.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,13 +16,7 @@ public class Categoria {
 	
 	@Column(nullable=false,length=50)	
 	private String nome;
-	
-	@OneToMany
-	@JoinTable(name="Categ_Card",
-				joinColumns=@JoinColumn(name="Categ_Id"),
-				inverseJoinColumns=@JoinColumn(name="Card_Id"))
-	private Collection<Cardapio> Cardapios;
-	
+		
 	public Long getId() {
 		return id;
 	}
