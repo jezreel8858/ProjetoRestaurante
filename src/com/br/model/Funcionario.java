@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -32,9 +31,6 @@ public class Funcionario extends Usuario{
 				inverseJoinColumns=@JoinColumn(name="Reserv_Id"))
 	private List<Reserva> reservas;
 	
-	@ManyToOne
-	private Loja loja;
-	
 	public float getSalario() {
 		return salario;
 	}
@@ -58,12 +54,6 @@ public class Funcionario extends Usuario{
 	}
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
-	}
-	public Loja getLoja() {
-		return loja;
-	}
-	public void setLoja(Loja loja) {
-		this.loja = loja;
 	}
 	
 }

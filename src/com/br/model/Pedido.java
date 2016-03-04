@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,9 +30,6 @@ public class Pedido {
 	@OneToMany(mappedBy="pedido")
 	private List<ItemCardapio> itemCardapios;
 	
-	@ManyToOne
-	private Loja loja;
-	
 	public Long getId() {
 		return id;
 	}
@@ -52,6 +48,13 @@ public class Pedido {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	public List<ItemCardapio> getItemCardapios() {
+		return itemCardapios;
+	}
+	public void setItemCardapios(List<ItemCardapio> itemCardapios) {
+		this.itemCardapios = itemCardapios;
+	}
+
 }
 
 

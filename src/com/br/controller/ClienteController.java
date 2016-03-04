@@ -1,12 +1,5 @@
 package com.br.controller;
 
-
-
-import java.util.List;
-
-import com.br.dao.ClienteDAO;
-import com.br.model.Cliente;
-
 public class ClienteController {
 
 //	private ClienteDAO clienteDao = null;

@@ -1,6 +1,9 @@
 package com.br.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.br.model.Pedido;
 
@@ -14,5 +17,14 @@ public class PedidoDAO extends GenericDAO<Pedido>{
 	public Class<Pedido> getClassType() {
 		return Pedido.class;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pedido> getPedidoStatus(String status){
+		
+		Query query = manager.createQuery("SELECT p FROM Pedido p WHERE p.status = :status");
+		query.setParameter("status", status);
+		return (List<Pedido>)query.getResultList();
+	}
+	
 
 }
