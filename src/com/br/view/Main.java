@@ -1,22 +1,40 @@
 package com.br.view;
 
+import javax.persistence.EntityManager;
+
+import com.br.dao.ClienteDAO;
+import com.br.model.Cliente;
+import com.br.model.Endereco;
 import com.br.util.JPAUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
-		JPAUtil.getEntityManager();
+		EntityManager em = JPAUtil.getEntityManager();
 		
-//		Cliente cliente = new Cliente();
-//		Endereco endereco = new Endereco();
-//		endereco.setCep("58077-028");
-//		endereco.setCidade("João Pessoa");
-//		endereco.setComplemento("Apart");
-//		endereco.setEstado("Paraiba");
-//		endereco.setLogradouro("desem");
-//		endereco.setNumero("167b");
-//		endereco.setPais("Brasil");		
-//		cliente.setEndereco(endereco);
+		Cliente cliente = new Cliente();
+		Endereco endereco = new Endereco();
+		endereco.setCep("58077-028");
+		endereco.setCidade("João Pessoa");
+		endereco.setComplemento("Apart");
+		endereco.setEstado("Paraiba");
+		endereco.setLogradouro("desem");
+		endereco.setNumero("167b");
+		endereco.setPais("Brasil");	
+		cliente.setNome("Jezreel");
+		cliente.setEmail("pedroNeto@gmail.com");
+		cliente.setLogin("pedro123");
+		cliente.setSenha("99322775");
+		cliente.setTelefone("88456213");
+		cliente.setEndereco(endereco);
+		
+		
+		ClienteDAO cliDAO = new ClienteDAO(em);
+		
+		cliDAO.insert(cliente);
+		em.getTransaction().begin();
+		em.getTransaction().commit();
+		em.close();
 //		
 //		
 //		cliente.setNome("Jezreel");
