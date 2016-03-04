@@ -1,6 +1,5 @@
 package com.br.model;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,13 +17,9 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(nullable=false,unique=true,length=20)
 	private String login;
-	@Column(nullable=false,length=20)
 	private String senha;
-	@Column(nullable=false,unique=true)
 	private String email;
-	@Column(nullable=false,unique=true)
 	private String telefone;
 	
 	public Long getId() {

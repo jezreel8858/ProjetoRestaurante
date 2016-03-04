@@ -26,9 +26,6 @@ public class Loja {
 	
 
 	@OneToMany
-//	@JoinTable(name="Loja_Ped",
-//				joinColumns=@JoinColumn(name="Loja_Id"),
-//				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
 	@JoinColumn(name="loja_id")
 	private Collection<Pedido> pedidos;
 }

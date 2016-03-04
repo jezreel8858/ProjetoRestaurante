@@ -3,7 +3,6 @@ package com.br.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Check;
-
 @Entity
 @Table(name="table_Pedido")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -29,8 +26,6 @@ public class Pedido {
 	@Temporal(TemporalType.DATE)
 	private Date data;	
 	
-	@Column(name="status",nullable=false,length=20)
-	@Check(constraints = "status IN ('Pendente','Finalizado','Atendido','Cancelado')")
 	private String status;
 	
 	@OneToMany(mappedBy="pedido")

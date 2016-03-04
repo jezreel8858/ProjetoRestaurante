@@ -14,8 +14,7 @@ import javax.persistence.TemporalType;
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class Cliente extends Usuario {
-	
-	@Column(nullable=false,length=50)	
+		
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
@@ -28,9 +27,6 @@ public class Cliente extends Usuario {
 	private Endereco endereco;
 
 	@OneToMany(mappedBy="cliente")
-//	@JoinTable(name="Cli_Deliv",
-//				joinColumns=@JoinColumn(name="Cli_Id"),
-//				inverseJoinColumns=@JoinColumn(name="Deliv_Id"))
 	private Collection<Delivery> deliverys;
 	
 

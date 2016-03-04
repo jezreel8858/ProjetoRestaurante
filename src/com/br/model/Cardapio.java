@@ -16,17 +16,10 @@ public class Cardapio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable=false,length=50)	
 	private String nome;
-	
-	@Column(nullable=false)
 	private float preco;
 	
 	@ManyToOne
-//	@JoinTable(name="card_cate",
-//		joinColumns=@JoinColumn(name="cardapio_id"),
-//		inverseJoinColumns=@JoinColumn(name="categoria_id"))
 	@JoinColumn(name="cardapio_id")
 	private Categoria categoria;
 	

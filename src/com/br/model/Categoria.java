@@ -13,8 +13,7 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable=false,length=50)	
+		
 	private String nome;
 		
 	public Long getId() {

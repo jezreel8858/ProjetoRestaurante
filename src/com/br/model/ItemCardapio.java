@@ -1,6 +1,5 @@
 package com.br.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,6 @@ public class ItemCardapio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="quantidade",nullable=false,length=50)	
 	private int qtd;
 	
 	@ManyToOne
@@ -24,9 +21,6 @@ public class ItemCardapio {
 	private Pedido pedido;
 	
 	@ManyToOne
-	//@JoinTable(name="item_card",
-	//	joinColumns=@JoinColumn(name="item_id"),
-	//	inverseJoinColumns=@JoinColumn(name="cardapio_id"))
 	@JoinColumn(name="item_id")
 	private Cardapio cardapio;
 	

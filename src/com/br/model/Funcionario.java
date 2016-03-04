@@ -1,6 +1,7 @@
 package com.br.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +24,13 @@ public class Funcionario extends Usuario{
 	@JoinTable(name="Fun_Ped",
 				joinColumns=@JoinColumn(name="Fun_Id"),
 				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
-	private Collection<Pedido> pedidos;
+	private List<Pedido> pedidos;
 	
 	@OneToMany
 	@JoinTable(name="Fun_Reserv",
 				joinColumns=@JoinColumn(name="Fun_Id"),
 				inverseJoinColumns=@JoinColumn(name="Reserv_Id"))
-	private Collection<Reserva> reservas;
+	private List<Reserva> reservas;
 	
 	@ManyToOne
 	private Loja loja;
@@ -49,13 +50,13 @@ public class Funcionario extends Usuario{
 	public Collection<Pedido> getPedidos() {
 		return pedidos;
 	}
-	public void setPedidos(Collection<Pedido> pedidos) {
+	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
 	public Collection<Reserva> getReservas() {
 		return reservas;
 	}
-	public void setReservas(Collection<Reserva> reservas) {
+	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
 	}
 	public Loja getLoja() {

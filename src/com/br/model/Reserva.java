@@ -1,7 +1,7 @@
 package com.br.model;
 
 import java.util.Date;
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,11 +20,9 @@ public class Reserva {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataReserva;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataMarcada;			
-	@Column(nullable=false)
-	private int nPessoas;			// Numero de pessoas para reserva
-	@Column(nullable=false)
-	private	String nomeResp;  		// Nome do Responsavel
+	private Date dataMarcada;
+	private int nPessoas;			
+	private	String nomeResp;  		
 	
 	@ManyToOne
 	@JoinColumn(name="fun_id")
