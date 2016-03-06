@@ -1,4 +1,4 @@
-package services;
+package com.br.services;
 
 import javax.persistence.EntityManager;
 
@@ -28,6 +28,7 @@ public class PedidoService {
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
+			System.out.println(e.getMessage());
 			manager.getTransaction().rollback();
 		}
 		finally{

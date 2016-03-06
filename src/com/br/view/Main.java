@@ -6,9 +6,8 @@ import java.util.Date;
 import com.br.model.Cardapio;
 import com.br.model.ItemCardapio;
 import com.br.model.Pedido;
-
-import services.CardapioService;
-import services.PedidoService;
+import com.br.services.CardapioService;
+import com.br.services.PedidoService;
 
 public class Main {
 
@@ -27,9 +26,9 @@ public class Main {
 	
 	ArrayList<ItemCardapio> itensCardapio = new ArrayList<ItemCardapio>();
 	
-	cardapio = CardapioService.find(cardapio);
+	//cardapio = CardapioService.find(cardapio);
 	itemCard.setCardapio(cardapio);
-	itemCard.setQtd(10);
+	itemCard.setQuantidade(10);
 	itensCardapio.add(itemCard);
 	pedido.setItemCardapios(itensCardapio);
 	

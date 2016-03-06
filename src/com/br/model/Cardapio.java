@@ -19,7 +19,7 @@ public class Cardapio {
 	private float preco;
 	
 	@ManyToOne
-	@JoinColumn(name="cardapio_id")
+	@JoinColumn(name="categoria_id")
 	private Categoria categoria;
 	
 	public Long getId() {

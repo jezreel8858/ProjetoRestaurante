@@ -1,4 +1,4 @@
-package services;
+package com.br.services;
 
 import javax.persistence.EntityManager;
 
