@@ -6,7 +6,6 @@ import java.util.Date;
 import com.br.model.Cardapio;
 import com.br.model.ItemCardapio;
 import com.br.model.Pedido;
-import com.br.services.CardapioService;
 import com.br.services.PedidoService;
 
 public class Main {
