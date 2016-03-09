@@ -24,13 +24,7 @@ public class Funcionario extends Usuario{
 				joinColumns=@JoinColumn(name="Fun_Id"),
 				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
 	private List<Pedido> pedidos;
-	
-	@OneToMany
-	@JoinTable(name="Fun_Reserv",
-				joinColumns=@JoinColumn(name="Fun_Id"),
-				inverseJoinColumns=@JoinColumn(name="Reserv_Id"))
-	private List<Reserva> reservas;
-	
+		
 	public float getSalario() {
 		return salario;
 	}
@@ -48,12 +42,6 @@ public class Funcionario extends Usuario{
 	}
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
-	}
-	public Collection<Reserva> getReservas() {
-		return reservas;
-	}
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
 	}
 	
 }

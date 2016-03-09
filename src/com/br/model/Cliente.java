@@ -24,7 +24,7 @@ public class Cliente extends Usuario {
 	
 	@Embedded
 	private Endereco endereco;
-
+	
 	@OneToMany(mappedBy="cliente")
 	private Collection<Delivery> deliverys;
 	
@@ -63,4 +63,5 @@ public class Cliente extends Usuario {
 	public void setDeliverys(Collection<Delivery> deliverys) {
 		this.deliverys = deliverys;
 	}
+	
 }
