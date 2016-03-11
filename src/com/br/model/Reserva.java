@@ -31,36 +31,62 @@ public class Reserva {
 	@ManyToOne
 	@JoinColumn(name="mesa_id")
 	private Mesa mesa;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date get_dataReserva() {
+
+	public Date getDataReserva() {
 		return dataReserva;
 	}
-	public void set_dataReserva(Date dataReserva) {
+
+	public void setDataReserva(Date dataReserva) {
 		this.dataReserva = dataReserva;
 	}
-	public Date get_dataMarcada() {
+
+	public Date getDataMarcada() {
 		return dataMarcada;
 	}
-	public void set_dataMarcada(Date dataMarcada) {
+
+	public void setDataMarcada(Date dataMarcada) {
 		this.dataMarcada = dataMarcada;
 	}
-	public int get_nPessoas() {
+
+	public int getnPessoas() {
 		return nPessoas;
 	}
-	public void set_nPessoas(int nPessoas) {
+
+	public void setnPessoas(int nPessoas) {
 		this.nPessoas = nPessoas;
 	}
-	public String get_nomeResp() {
+
+	public String getNomeResp() {
 		return nomeResp;
 	}
-	public void set_nomeResp(String nomeResp) {
+
+	public void setNomeResp(String nomeResp) {
 		this.nomeResp = nomeResp;
 	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Mesa getMesa() {
+		return mesa;
+	}
+
+	public void setMesa(Mesa mesa) {
+		this.mesa = mesa;
+	}
+	
 	
 }

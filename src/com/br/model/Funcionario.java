@@ -1,13 +1,7 @@
 package com.br.model;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
@@ -19,11 +13,7 @@ public class Funcionario extends Usuario{
 	@Column(nullable=false,length=11)
 	private String cpf;
 	
-	@OneToMany
-	@JoinTable(name="Fun_Ped",
-				joinColumns=@JoinColumn(name="Fun_Id"),
-				inverseJoinColumns=@JoinColumn(name="Ped_Id"))
-	private List<Pedido> pedidos;
+
 		
 	public float getSalario() {
 		return salario;
@@ -36,12 +26,6 @@ public class Funcionario extends Usuario{
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-	public Collection<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
 	}
 	
 }

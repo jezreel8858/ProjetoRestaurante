@@ -18,12 +18,12 @@ public class PedidoDAO extends GenericDAO<Pedido>{
 		return Pedido.class;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Pedido> getPedidoStatus(String status){
 		
 		Query query = manager.createQuery("SELECT p FROM Pedido p WHERE p.status = :status");
 		query.setParameter("status", status);
-		return (List<Pedido>)query.getResultList();
+		List<Pedido> resultList = (List<Pedido>) query.getResultList();
+		return resultList;
 	}
 	
 

@@ -16,12 +16,13 @@ public class ClienteDAO extends GenericDAO<Cliente>{
 		return Cliente.class;
 	}
 	
-	public Cliente getClienteLogin(Cliente cliente){
+	public boolean exist(Cliente cliente){
 		Query result = null;
-		result = this.manager.createQuery("SELECT c FROM Cliente c WHERE c.login: =login");
+		result = this.manager.createQuery("SELECT COUNT(c) FROM Cliente c WHERE c.login = :login");
 		result.setParameter("login", cliente.getLogin());
 		
-		return (Cliente) result.getSingleResult();
+		return ((long) result.getSingleResult()) != 0;
 	}
 	
+
 }

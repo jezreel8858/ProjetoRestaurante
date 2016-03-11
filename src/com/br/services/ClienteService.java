@@ -13,43 +13,49 @@ public class ClienteService {
 		
 		try{
 			ClienteDAO clienteDAO = new ClienteDAO(manager);
-			Cliente teste = clienteDAO.getClienteLogin(cliente);
-			if(teste!=null){
-				clienteDAO.insert(cliente);
-				manager.getTransaction().begin();
-				manager.getTransaction().commit();
+			boolean exist = clienteDAO.exist(cliente);
+			if(exist){
+				throw new Exception("Usuario já existe");
 			}
-			
-			
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-			manager.getTransaction().rollback();
-		}
-		finally{
-			manager.close();
-		}
-	}
-	
-	public  static void delete(Cliente cliente) {
-		
-		EntityManager  manager =  JPAUtil.getEntityManager();
-		
-		try{
-			ClienteDAO clienteDAO = new ClienteDAO(manager);
-			
-			clienteDAO.delete(cliente);
+				
+			clienteDAO.insert(cliente);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();
 		}
 	}
 	
-public  static Cliente find(Cliente cliente) {
+	public static void update(Cliente cliente){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		
+		try{
+			ClienteDAO clienteDAO = new ClienteDAO(manager);
+			clienteDAO.update(cliente);
+			manager.getTransaction().begin();
+			manager.getTransaction().commit();
+			
+		}catch (Exception e){
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
+		}
+		finally{
+			manager.close();
+		}
+	}
+	
+	public static void delete(Cliente cliente) {
+		cliente.setAtivo(false);
+		update(cliente);
+	}
+	
+	public  static Cliente find(Cliente cliente) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Cliente result = null;
@@ -61,7 +67,8 @@ public  static Cliente find(Cliente cliente) {
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();

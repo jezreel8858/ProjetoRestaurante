@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="table_Cardapio")
 public class Cardapio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

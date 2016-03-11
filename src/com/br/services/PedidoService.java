@@ -17,11 +17,11 @@ public class PedidoService {
 			PedidoDAO pedidoDAO = new PedidoDAO(manager);
 			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
-			for(ItemCardapio ItemCardapio:pedido.getItemCardapios()){
-				if(ItemCardapio.getCardapio() == null ){
+			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
+				if(itemCardapio.getCardapio() == null ){
 					throw new Exception("Item sem cardápio");
 				}
-				ItemCardapioDAO.insert(ItemCardapio);
+				ItemCardapioDAO.insert(itemCardapio);
 			}
 			pedidoDAO.insert(pedido);
 			manager.getTransaction().begin();
@@ -29,7 +29,35 @@ public class PedidoService {
 			
 		}catch (Exception e){
 			System.out.println(e.getMessage());
-			manager.getTransaction().rollback();
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
+		}
+		finally{
+			manager.close();
+		}
+	}
+	
+	public  static void update(Pedido pedido) {
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		
+		try{
+			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
+			
+			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
+				if(itemCardapio.getCardapio() == null ){
+					throw new Exception("Item sem cardápio");
+				}
+				ItemCardapioDAO.update(itemCardapio);
+			}
+			pedidoDAO.update(pedido);
+			manager.getTransaction().begin();
+			manager.getTransaction().commit();
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();
@@ -37,7 +65,6 @@ public class PedidoService {
 	}
 	
 	public  static void delete(Pedido pedido) {
-		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -52,14 +79,15 @@ public class PedidoService {
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();
 		}
 	}
 	
-public  static Pedido find(Pedido pedido) {
+	public  static Pedido find(Pedido pedido) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Pedido result = null;
@@ -71,7 +99,8 @@ public  static Pedido find(Pedido pedido) {
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();

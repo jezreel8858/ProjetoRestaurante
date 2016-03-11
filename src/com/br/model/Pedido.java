@@ -9,13 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="table_Pedido")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pedido {
 	@Id
@@ -26,6 +26,10 @@ public class Pedido {
 	private Date data;	
 	
 	private String status;
+	
+	@ManyToOne
+	@JoinColumn(name="fun_id")
+	private Funcionario funcionario;
 	
 	@OneToMany(mappedBy="pedido")
 	private List<ItemCardapio> itemCardapios;
@@ -53,7 +57,13 @@ public class Pedido {
 	}
 	public void setItemCardapios(List<ItemCardapio> itemCardapios) {
 		this.itemCardapios = itemCardapios;
-	}
+	}	
+//	public Funcionario getFuncionario() {
+//		return funcionario;
+//	}
+//	public void setFuncionario(Funcionario funcionario) {
+//		this.funcionario = funcionario;
+//	}
 
 }
 

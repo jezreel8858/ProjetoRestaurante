@@ -14,8 +14,6 @@ import javax.persistence.TemporalType;
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class Cliente extends Usuario {
 		
-	private String nome;
-	
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;	
 	
@@ -35,12 +33,7 @@ public class Cliente extends Usuario {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
@@ -54,8 +47,7 @@ public class Cliente extends Usuario {
 		this.dataNasc = dataNasc;
 	}
 	public String toString(){
-		return String.format("Nome: %s\nCliente desde: %s\nData de Nascimento: %s\n",
-							this.nome,this.dataCadastro,this.dataNasc,this.endereco );
+		return String.format("Nome: %s\nCliente desde: %s\nData de Nascimento: %s\n",this.dataCadastro,this.dataNasc,this.endereco );
 	}
 	public Collection<Delivery> getDeliverys() {
 		return deliverys;

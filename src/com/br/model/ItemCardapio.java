@@ -9,19 +9,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="table_itemCardapio")
+
 public class ItemCardapio {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private int quantidade;
+	private int qtd;
 	
 	@ManyToOne
-	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JoinColumn(name="cardapio_id")
 	private Cardapio cardapio;
 	
 	public Long getId() {
@@ -31,12 +29,13 @@ public class ItemCardapio {
 		this.id = id;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
+	public int getQtd() {
+		return qtd;
 	}
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
+	
 	public Pedido getPedido() {
 		return pedido;
 	}
