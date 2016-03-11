@@ -1,6 +1,7 @@
 package com.br.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.br.model.Funcionario;
 
@@ -13,5 +14,13 @@ public class FuncionarioDAO extends GenericDAO<Funcionario>{
 	@Override
 	public Class<Funcionario> getClassType() {
 		return Funcionario.class;
+	}
+	
+	public boolean exist(Funcionario funcionario){
+		Query result = null;
+		result = this.manager.createQuery("SELECT COUNT(c) FROM Funcionario c WHERE c.login = :login");
+		result.setParameter("login", funcionario.getLogin());
+		
+		return ((long) result.getSingleResult()) != 0;
 	}
 }

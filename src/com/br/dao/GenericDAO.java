@@ -1,6 +1,9 @@
 package com.br.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public abstract class GenericDAO<T> {
 	
@@ -24,6 +27,12 @@ public abstract class GenericDAO<T> {
 	
 	public void delete(T entity){
 		manager.remove(entity);
+	}
+	
+	public List<T> listar() {
+		Query query = manager.createQuery("select p from "
+				+ getClassType().getSimpleName() + " p");
+		return  query.getResultList();
 	}
 	
 	public abstract Class<T> getClassType();

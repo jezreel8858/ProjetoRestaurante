@@ -1,7 +1,9 @@
 package com.br.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import com.br.model.Funcionario;
 import com.br.model.Gerente;
 
 public class GerenteDAO extends GenericDAO<Gerente> {
@@ -13,5 +15,13 @@ public class GerenteDAO extends GenericDAO<Gerente> {
 	@Override
 	public Class<Gerente> getClassType() {
 		return Gerente.class;
+	}
+	
+	public boolean exist(Gerente gerente){
+		Query result = null;
+		result = this.manager.createQuery("SELECT COUNT(c) FROM Gerente c WHERE c.login = :login");
+		result.setParameter("login", gerente.getLogin());
+		
+		return ((long) result.getSingleResult()) != 0;
 	}
 }

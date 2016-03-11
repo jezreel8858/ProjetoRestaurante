@@ -2,23 +2,42 @@ package com.br.services;
 
 import javax.persistence.EntityManager;
 
-import com.br.dao.CardapioDAO;
-import com.br.model.Cardapio;
+import com.br.dao.FuncionarioDAO;
+import com.br.model.Funcionario;
 import com.br.util.JPAUtil;
 
-public class CardapioService {
+public class FuncionarioService {
 
-	public static void insert(Cardapio cardapio) {
+	public  static void insert(Funcionario funcionario) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			CardapioDAO CardapioDAO = new CardapioDAO(manager);
-			
-			if(cardapio.getCategoria() == null){
-				throw new Exception("Cardapio sem categoria");
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
+			boolean exist = funcionarioDAO.exist(funcionario);
+			if(exist){
+				throw new Exception("Funcionario já existe");
 			}
+				
+			funcionarioDAO.insert(funcionario);
+			manager.getTransaction().begin();
+			manager.getTransaction().commit();
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
+		}
+		finally{
+			manager.close();
+		}
+	}
 	
-			CardapioDAO.insert(cardapio);
+	public static void update(Funcionario funcionario){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		
+		try{
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
+			funcionarioDAO.update(funcionario);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -31,37 +50,19 @@ public class CardapioService {
 		}
 	}
 	
-	public static void update(Cardapio cardapio) {
-		EntityManager  manager =  JPAUtil.getEntityManager();
-		
-		try{
-			CardapioDAO CardapioDAO = new CardapioDAO(manager);
-			
-			if(cardapio.getCategoria() == null){
-				throw new Exception("Cardapio sem categoria");
-			}
-	
-			CardapioDAO.update(cardapio);
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
-			
-		}catch (Exception e){
-			if(manager.getTransaction().isActive())
-				manager.getTransaction().rollback();
-		}
-		finally{
-			manager.close();
-		}
+	public static void delete(Funcionario funcionario) {
+		funcionario.setAtivo(false);
+		update(funcionario);
 	}
 	
-	public static Cardapio find(Cardapio cardapio) {
+	public  static Funcionario find(Funcionario funcionario) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
-		Cardapio result = null;
+		Funcionario result = null;
 		try{
-			CardapioDAO cardapioDAO = new CardapioDAO(manager);
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
 			
-			result = cardapioDAO.findById(cardapio.getId());
+			result = funcionarioDAO.findById(funcionario.getId());
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -74,5 +75,4 @@ public class CardapioService {
 		}
 		return result;
 	}
-
 }

@@ -22,7 +22,8 @@ public class PedidoDAO extends GenericDAO<Pedido>{
 		
 		Query query = manager.createQuery("SELECT p FROM Pedido p WHERE p.status = :status");
 		query.setParameter("status", status);
-		List<Pedido> resultList = (List<Pedido>) query.getResultList();
+		
+		List<Pedido> resultList = query.getResultList();
 		return resultList;
 	}
 	
