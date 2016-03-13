@@ -55,11 +55,9 @@ public  static Categoria find(Categoria categoria) {
 			CategoriaDAO categoriaDAO = new CategoriaDAO(manager);
 			
 			result = categoriaDAO.findById(categoria.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+
 		}
 		finally{
 			manager.close();

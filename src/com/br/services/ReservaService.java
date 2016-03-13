@@ -43,6 +43,7 @@ public class ReservaService {
 			manager.getTransaction().commit();
 			
 		}catch (Exception e){
+			System.out.println(e.getMessage());
 			manager.getTransaction().rollback();
 		}
 		finally{
@@ -55,14 +56,11 @@ public  static Reserva find(Reserva reserva) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Reserva result = null;
 		try{
-			ReservaDAO reservaDAO = new ReservaDAO(manager);
-			
+			ReservaDAO reservaDAO = new ReservaDAO(manager);			
 			result = reservaDAO.findById(reserva.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+			System.out.println(e.getMessage());
 		}
 		finally{
 			manager.close();

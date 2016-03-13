@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 
-public class ItemCardapio {
+public class ItemCardapio implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

@@ -60,15 +60,10 @@ public class CardapioService {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Cardapio result = null;
 		try{
-			CardapioDAO cardapioDAO = new CardapioDAO(manager);
-			
+			CardapioDAO cardapioDAO = new CardapioDAO(manager);	
 			result = cardapioDAO.findById(cardapio.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
-			
 		}catch (Exception e){
-			if(manager.getTransaction().isActive())
-				manager.getTransaction().rollback();
+
 		}
 		finally{
 			manager.close();

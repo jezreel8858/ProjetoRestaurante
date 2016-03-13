@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Cardapio {
+public class Cardapio implements EntityClass{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

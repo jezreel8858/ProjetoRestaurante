@@ -54,11 +54,9 @@ public  static Mesa find(Mesa mesa) {
 			MesaDAO mesaDAO = new MesaDAO(manager);
 			
 			result = mesaDAO.findById(mesa.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
 			
 		}catch (Exception e){
-			manager.getTransaction().rollback();
+
 		}
 		finally{
 			manager.close();

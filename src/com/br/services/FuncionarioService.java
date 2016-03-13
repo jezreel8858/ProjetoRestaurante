@@ -63,12 +63,10 @@ public class FuncionarioService {
 			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
 			
 			result = funcionarioDAO.findById(funcionario.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
+
 			
 		}catch (Exception e){
-			if(manager.getTransaction().isActive())
-				manager.getTransaction().rollback();
+
 		}
 		finally{
 			manager.close();

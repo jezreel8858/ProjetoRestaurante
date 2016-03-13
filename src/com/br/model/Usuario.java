@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
-public class Usuario {
+public class Usuario implements EntityClass{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Mesa {
+public class Mesa implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

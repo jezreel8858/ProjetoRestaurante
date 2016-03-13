@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="table_Categoria")
-public class Categoria {
+public class Categoria implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

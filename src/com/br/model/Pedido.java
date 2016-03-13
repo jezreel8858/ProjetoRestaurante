@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class Pedido {
+public class Pedido implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

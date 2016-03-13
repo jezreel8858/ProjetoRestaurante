@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public abstract class GenericDAO<T> {
+import com.br.model.EntityClass;
+
+public abstract class GenericDAO<T extends EntityClass> {
 	
 	protected EntityManager manager;
 	
@@ -26,6 +28,7 @@ public abstract class GenericDAO<T> {
 	}
 	
 	public void delete(T entity){
+		entity = findById(entity.getId());
 		manager.remove(entity);
 	}
 	

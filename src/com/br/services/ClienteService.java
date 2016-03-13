@@ -63,12 +63,10 @@ public class ClienteService {
 			ClienteDAO clienteDAO = new ClienteDAO(manager);
 			
 			result = clienteDAO.findById(cliente.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
+
 			
 		}catch (Exception e){
-			if(manager.getTransaction().isActive())
-				manager.getTransaction().rollback();
+
 		}
 		finally{
 			manager.close();
