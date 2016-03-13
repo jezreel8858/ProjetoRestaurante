@@ -45,4 +45,9 @@ public class Cardapio {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	@Override
+	public String toString() {
+		return "Cardapio [nome=" + nome + ", preco=" + preco + "]";
+	}
+	
 }

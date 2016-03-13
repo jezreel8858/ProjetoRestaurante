@@ -3,27 +3,29 @@ package com.br.services;
 import javax.persistence.EntityManager;
 
 import com.br.dao.ItemCardapioDAO;
-import com.br.dao.PedidoDAO;
+import com.br.dao.DeliveryDAO;
 import com.br.model.ItemCardapio;
-import com.br.model.Pedido;
+import com.br.model.Delivery;
 import com.br.util.JPAUtil;
 
-public class PedidoService {
+public class DeliveryService {
 
-	public  static void insert(Pedido pedido) {
+	public  static void insert(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);
 			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
-			
-			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
+			if(delivery.getCliente() == null){
+				throw new Exception("Delivery sem cliente");
+			}
+			for(ItemCardapio itemCardapio:delivery.getItemCardapios()){
 				if(itemCardapio.getCardapio() == null ){
 					throw new Exception("Item sem cardápio");
 				}
 				ItemCardapioDAO.insert(itemCardapio);
 			}
-			pedidoDAO.insert(pedido);
+			deliveryDAO.insert(delivery);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -37,20 +39,20 @@ public class PedidoService {
 		}
 	}
 	
-	public  static void update(Pedido pedido) {
+	public  static void update(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);
 			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
-			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
+			for(ItemCardapio itemCardapio:delivery.getItemCardapios()){
 				if(itemCardapio.getCardapio() == null ){
 					throw new Exception("Item sem cardápio");
 				}
 				ItemCardapioDAO.update(itemCardapio);
 			}
-			pedidoDAO.update(pedido);
+			deliveryDAO.update(delivery);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -64,18 +66,18 @@ public class PedidoService {
 		}
 	}
 	
-	public  static void delete(Pedido pedido) {
+	public  static void delete(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);
 //			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
-//			for(ItemCardapio ItemCardapio:pedido.getItemCardapios()){
+//			for(ItemCardapio ItemCardapio:delivery.getItemCardapios()){
 //				ItemCardapioDAO.delete(ItemCardapio);
 //			}
-			pedido.setStatus("Cancelado");
-			pedidoDAO.update(pedido);
+			delivery.setStatus("Cancelado");
+			deliveryDAO.update(delivery);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -88,13 +90,13 @@ public class PedidoService {
 		}
 	}
 	
-	public  static Pedido find(Pedido pedido) {
+	public  static Delivery find(Delivery delivery) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
-		Pedido result = null;
+		Delivery result = null;
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);	
-			result = pedidoDAO.findById(pedido.getId());
+			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);	
+			result = deliveryDAO.findById(delivery.getId());
 			
 		}catch (Exception e){
 			System.out.println(e.getMessage());

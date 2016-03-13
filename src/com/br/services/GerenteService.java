@@ -2,23 +2,23 @@ package com.br.services;
 
 import javax.persistence.EntityManager;
 
-import com.br.dao.CardapioDAO;
-import com.br.model.Cardapio;
+import com.br.dao.GerenteDAO;
+import com.br.model.Gerente;
 import com.br.util.JPAUtil;
 
-public class CardapioService {
+public class GerenteService {
 
-	public static void insert(Cardapio cardapio) {
+	public  static void insert(Gerente gerente) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			CardapioDAO CardapioDAO = new CardapioDAO(manager);
-			
-			if(cardapio.getCategoria() == null){
-				throw new Exception("Cardapio sem categoria");
+			GerenteDAO gerenteDAO = new GerenteDAO(manager);
+			boolean exist = gerenteDAO.exist(gerente);
+			if(exist){
+				throw new Exception("Usuario já existe");
 			}
-	
-			CardapioDAO.insert(cardapio);
+				
+			gerenteDAO.insert(gerente);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -32,17 +32,12 @@ public class CardapioService {
 		}
 	}
 	
-	public static void update(Cardapio cardapio) {
+	public static void update(Gerente gerente){
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			CardapioDAO CardapioDAO = new CardapioDAO(manager);
-			
-			if(cardapio.getCategoria() == null){
-				throw new Exception("Cardapio sem categoria");
-			}
-	
-			CardapioDAO.update(cardapio);
+			GerenteDAO gerenteDAO = new GerenteDAO(manager);
+			gerenteDAO.update(gerente);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -55,25 +50,25 @@ public class CardapioService {
 		}
 	}
 	
-	public static Cardapio find(Cardapio cardapio) {
+	public static void delete(Gerente gerente) {
+		gerente.setAtivo(false);
+		update(gerente);
+	}
+	
+	public  static Gerente find(Gerente gerente) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
-		Cardapio result = null;
+		Gerente result = null;
 		try{
-			CardapioDAO cardapioDAO = new CardapioDAO(manager);
-			
-			result = cardapioDAO.findById(cardapio.getId());
-			manager.getTransaction().begin();
-			manager.getTransaction().commit();
+			GerenteDAO gerenteDAO = new GerenteDAO(manager);			
+			result = gerenteDAO.findById(gerente.getId());	
 			
 		}catch (Exception e){
-			if(manager.getTransaction().isActive())
-				manager.getTransaction().rollback();
+			System.out.println(e.getMessage());
 		}
 		finally{
 			manager.close();
 		}
 		return result;
 	}
-
 }

@@ -23,4 +23,13 @@ public class Delivery extends Pedido {
 	public String toString(){
 		return String.format("Troco: %f", this.troco);
 	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
 }

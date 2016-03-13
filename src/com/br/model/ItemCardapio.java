@@ -46,6 +46,13 @@ public class ItemCardapio {
 	public void setCardapio(Cardapio cardapio) {
 		this.cardapio = cardapio;
 	}
-
+	
+	public float getSubTotal(){
+		return cardapio.getPreco()*qtd;
+	}
+	@Override
+	public String toString() {
+		return "ItemCardapio [id=" + id + ", qtd=" + qtd + ", "+ cardapio +"]";
+	}
 	
 }

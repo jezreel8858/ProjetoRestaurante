@@ -1,9 +1,11 @@
 package com.br.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +33,8 @@ public class Pedido {
 	@JoinColumn(name="fun_id")
 	private Funcionario funcionario;
 	
-	@OneToMany(mappedBy="pedido")
-	private List<ItemCardapio> itemCardapios;
+	@OneToMany(mappedBy="pedido", fetch=FetchType.EAGER)
+	private List<ItemCardapio> itemCardapios = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -58,12 +60,32 @@ public class Pedido {
 	public void setItemCardapios(List<ItemCardapio> itemCardapios) {
 		this.itemCardapios = itemCardapios;
 	}	
-//	public Funcionario getFuncionario() {
-//		return funcionario;
-//	}
-//	public void setFuncionario(Funcionario funcionario) {
-//		this.funcionario = funcionario;
-//	}
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+	public void addItemCardapio(int qtd, Cardapio cardapio){
+		ItemCardapio itemCardapio = new ItemCardapio();
+		itemCardapio.setQtd(qtd);
+		itemCardapio.setCardapio(cardapio);
+		itemCardapio.setPedido(this);
+		itemCardapios.add(itemCardapio);
+	}
+	public float getTotal(){
+		float totalResult = 0;
+		for (ItemCardapio itemCardapio : itemCardapios) {
+			totalResult += itemCardapio.getSubTotal();
+		}
+		return totalResult;
+	}
+	
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", data=" + data + ", status=" + status + ", funcionario=" + funcionario
+				+ ", "+ itemCardapios + "]";
+	}
 
 }
 

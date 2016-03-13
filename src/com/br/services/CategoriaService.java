@@ -20,7 +20,8 @@ public class CategoriaService {
 			
 		}catch (Exception e){
 			System.out.println(e.getMessage());
-			manager.getTransaction().rollback();
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
 		}
 		finally{
 			manager.close();

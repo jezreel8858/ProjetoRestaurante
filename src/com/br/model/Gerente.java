@@ -5,6 +5,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName="id")
-public class Gerente extends Funcionario{
+public class Gerente extends Usuario{
 
 }
