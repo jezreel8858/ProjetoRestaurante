@@ -1,5 +1,8 @@
 package com.br.services;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.br.dao.CardapioDAO;
@@ -8,7 +11,7 @@ import com.br.util.JPAUtil;
 
 public class CardapioService {
 
-	public static void insert(Cardapio cardapio) {
+	public static void criar(Cardapio cardapio) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -32,7 +35,7 @@ public class CardapioService {
 		}
 	}
 	
-	public static void update(Cardapio cardapio) {
+	public static void atualizar(Cardapio cardapio) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -55,7 +58,26 @@ public class CardapioService {
 		}
 	}
 	
-	public static Cardapio find(Cardapio cardapio) {
+	public static void remover(Cardapio cardapio){
+		EntityManager manager = JPAUtil.getEntityManager();
+		
+		try {
+			CardapioDAO cardapioDAO = new CardapioDAO(manager);
+			
+			cardapioDAO.delete(cardapio);
+			manager.getTransaction().begin();
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
+		}finally{
+			manager.close();
+		}
+	}
+	
+	public static Cardapio procurar(Cardapio cardapio) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Cardapio result = null;
@@ -64,6 +86,22 @@ public class CardapioService {
 			result = cardapioDAO.findById(cardapio.getId());
 		}catch (Exception e){
 
+		}
+		finally{
+			manager.close();
+		}
+		return result;
+	}
+	
+	public static List<Cardapio> listar(){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		List<Cardapio> result = Collections.emptyList();
+		try{
+			CardapioDAO cardapioDAO = new CardapioDAO(manager);
+			result = cardapioDAO.getAll();
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 		finally{
 			manager.close();

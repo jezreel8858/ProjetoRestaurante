@@ -3,7 +3,6 @@ package com.br.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import com.br.model.Funcionario;
 import com.br.model.Gerente;
 
 public class GerenteDAO extends GenericDAO<Gerente> {

@@ -18,4 +18,5 @@ public class Tradicional extends Pedido {
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
+	
 }

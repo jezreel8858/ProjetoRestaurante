@@ -1,20 +1,23 @@
 package com.br.services;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.br.dao.ItemCardapioDAO;
-import com.br.dao.PedidoDAO;
+import com.br.dao.TradicionalDAO;
 import com.br.model.ItemCardapio;
-import com.br.model.Pedido;
+import com.br.model.Tradicional;
 import com.br.util.JPAUtil;
 
-public class PedidoService {
+public class TradicionalService {
 
-	public  static void insert(Pedido pedido) {
+	public  static void criar(Tradicional pedido) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			TradicionalDAO pedidoDAO = new TradicionalDAO(manager);
 			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
 			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
@@ -37,11 +40,11 @@ public class PedidoService {
 		}
 	}
 	
-	public  static void update(Pedido pedido) {
+	public  static void atualizar(Tradicional pedido) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			TradicionalDAO pedidoDAO = new TradicionalDAO(manager);
 			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
 			for(ItemCardapio itemCardapio:pedido.getItemCardapios()){
@@ -64,11 +67,11 @@ public class PedidoService {
 		}
 	}
 	
-	public  static void delete(Pedido pedido) {
+	public  static void remover(Tradicional pedido) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);
+			TradicionalDAO pedidoDAO = new TradicionalDAO(manager);
 //			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
 //			for(ItemCardapio ItemCardapio:pedido.getItemCardapios()){
@@ -88,13 +91,29 @@ public class PedidoService {
 		}
 	}
 	
-	public  static Pedido find(Pedido pedido) {
+	public  static Tradicional procurar(Tradicional pedido) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
-		Pedido result = null;
+		Tradicional result = null;
 		try{
-			PedidoDAO pedidoDAO = new PedidoDAO(manager);	
+			TradicionalDAO pedidoDAO = new TradicionalDAO(manager);	
 			result = pedidoDAO.findById(pedido.getId());
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			manager.close();
+		}
+		return result;
+	}
+	
+	public static List<Tradicional> listar(){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		List<Tradicional> result = Collections.emptyList();
+		try{
+			TradicionalDAO tradicionalDAO = new TradicionalDAO(manager);
+			result = tradicionalDAO.getAll();
 			
 		}catch (Exception e){
 			System.out.println(e.getMessage());

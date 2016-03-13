@@ -23,7 +23,7 @@ public class Usuario implements EntityClass{
 	private String senha;
 	private String email;
 	private String telefone;
-	private boolean ativo;
+	private boolean desativado;
 
 	public Long getId() {
 		return id;
@@ -72,12 +72,14 @@ public class Usuario implements EntityClass{
 		this.telefone = telefone;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public boolean isDesativado() {
+		return desativado;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setDesativado(boolean desativado) {
+		this.desativado = desativado;
 	}
+
+
 
 }

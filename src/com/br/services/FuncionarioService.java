@@ -1,5 +1,8 @@
 package com.br.services;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.br.dao.FuncionarioDAO;
@@ -8,7 +11,7 @@ import com.br.util.JPAUtil;
 
 public class FuncionarioService {
 
-	public  static void insert(Funcionario funcionario) {
+	public  static void criar(Funcionario funcionario) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -32,7 +35,7 @@ public class FuncionarioService {
 		}
 	}
 	
-	public static void update(Funcionario funcionario){
+	public static void atualizar(Funcionario funcionario){
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -50,12 +53,30 @@ public class FuncionarioService {
 		}
 	}
 	
-	public static void delete(Funcionario funcionario) {
-		funcionario.setAtivo(false);
-		update(funcionario);
+	public static void remover(Funcionario funcionario){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		
+		try{
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
+			funcionarioDAO.delete(funcionario);
+			manager.getTransaction().begin();
+			manager.getTransaction().commit();
+			
+		}catch (Exception e){
+			if(manager.getTransaction().isActive())
+				manager.getTransaction().rollback();
+		}
+		finally{
+			manager.close();
+		}
 	}
 	
-	public  static Funcionario find(Funcionario funcionario) {
+	public static void desativar(Funcionario funcionario) {
+		funcionario.setDesativado(true);
+		atualizar(funcionario);
+	}
+	
+	public  static Funcionario procurar(Funcionario funcionario) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Funcionario result = null;
@@ -67,6 +88,22 @@ public class FuncionarioService {
 			
 		}catch (Exception e){
 
+		}
+		finally{
+			manager.close();
+		}
+		return result;
+	}
+	
+	public static List<Funcionario> listar(){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		List<Funcionario> result = Collections.emptyList();
+		try{
+			FuncionarioDAO funcionarioDAO = new FuncionarioDAO(manager);
+			result = funcionarioDAO.getAll();
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
 		}
 		finally{
 			manager.close();

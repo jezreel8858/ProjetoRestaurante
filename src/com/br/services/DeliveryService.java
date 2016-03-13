@@ -1,16 +1,19 @@
 package com.br.services;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
-import com.br.dao.ItemCardapioDAO;
 import com.br.dao.DeliveryDAO;
-import com.br.model.ItemCardapio;
+import com.br.dao.ItemCardapioDAO;
 import com.br.model.Delivery;
+import com.br.model.ItemCardapio;
 import com.br.util.JPAUtil;
 
 public class DeliveryService {
 
-	public  static void insert(Delivery delivery) {
+	public  static void criar(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -39,7 +42,7 @@ public class DeliveryService {
 		}
 	}
 	
-	public  static void update(Delivery delivery) {
+	public  static void atualizar(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
@@ -66,18 +69,18 @@ public class DeliveryService {
 		}
 	}
 	
-	public  static void delete(Delivery delivery) {
+	public  static void remover(Delivery delivery) {
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		
 		try{
 			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);
-//			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
+			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
 			
-//			for(ItemCardapio ItemCardapio:delivery.getItemCardapios()){
-//				ItemCardapioDAO.delete(ItemCardapio);
-//			}
-			delivery.setStatus("Cancelado");
-			deliveryDAO.update(delivery);
+			for(ItemCardapio ItemCardapio:delivery.getItemCardapios()){
+				ItemCardapioDAO.delete(ItemCardapio);
+			}
+			
+			deliveryDAO.delete(delivery);
 			manager.getTransaction().begin();
 			manager.getTransaction().commit();
 			
@@ -90,13 +93,29 @@ public class DeliveryService {
 		}
 	}
 	
-	public  static Delivery find(Delivery delivery) {
+	public  static Delivery procurar(Delivery delivery) {
 		
 		EntityManager  manager =  JPAUtil.getEntityManager();
 		Delivery result = null;
 		try{
 			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);	
 			result = deliveryDAO.findById(delivery.getId());
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			manager.close();
+		}
+		return result;
+	}
+	
+	public static List<Delivery> listar(){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		List<Delivery> result = Collections.emptyList();
+		try{
+			DeliveryDAO deliveryDAO = new DeliveryDAO(manager);
+			result = deliveryDAO.getAll();
 			
 		}catch (Exception e){
 			System.out.println(e.getMessage());

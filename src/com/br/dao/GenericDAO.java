@@ -32,7 +32,7 @@ public abstract class GenericDAO<T extends EntityClass> {
 		manager.remove(entity);
 	}
 	
-	public List<T> listar() {
+	public List<T> getAll() {
 		Query query = manager.createQuery("select p from "
 				+ getClassType().getSimpleName() + " p");
 		return  query.getResultList();

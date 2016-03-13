@@ -1,37 +1,39 @@
 package com.br.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.br.model.Cardapio;
 import com.br.model.Categoria;
-import com.br.model.ItemCardapio;
-import com.br.model.Pedido;
+import com.br.model.Mesa;
+import com.br.model.Tradicional;
 import com.br.services.CardapioService;
 import com.br.services.CategoriaService;
-import com.br.services.PedidoService;
+import com.br.services.MesaService;
+import com.br.services.TradicionalService;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Mesa mesa = new Mesa();
+		mesa.setNumero(5);
+		MesaService.criar(mesa);
 		
 		Categoria categoria = new Categoria();
 		categoria.setNome("Bebida");
-		CategoriaService.insert(categoria);
+		CategoriaService.criar(categoria);
 		
 		Cardapio cardapio = new Cardapio();
 		cardapio.setNome("Coca");
 		cardapio.setPreco(3.5f);
 		cardapio.setCategoria(categoria);		
-		CardapioService.insert(cardapio);
+		CardapioService.criar(cardapio);
 		
-		Pedido pedido = new Pedido();
+		Tradicional pedido = new Tradicional();
 		pedido.addItemCardapio(10, cardapio);
+		pedido.setMesa(mesa);
 //		itemCard.setPedido(pedido);
 		
 		
 		
-		PedidoService.insert(pedido);
+		TradicionalService.criar(pedido);
 		
 //		Cliente cliente = new Cliente();
 //		cliente.setNome("Alex");
@@ -39,14 +41,12 @@ public class Main {
 //		cliente.setSenha("senha");
 //		cliente.setDataCadastro(new Date());
 //	
-//		ClienteService.insert(cliente);
+//		ClienteService.criar(cliente);
 	
-		Pedido pedido2 = new Pedido();
-		pedido2.setId(21l);
-		pedido2 = PedidoService.find(pedido2);
-		System.out.println(pedido2);
-
-	
+		Tradicional pedido2 = new Tradicional();
+		pedido2.setId(58l);
+		pedido2 = TradicionalService.procurar(pedido2);
+		System.out.println(pedido2); 
 	}
 
 }
