@@ -18,7 +18,7 @@ public class GerenteDAO extends GenericDAO<Gerente> {
 	
 	public boolean exist(Gerente gerente){
 		Query result = null;
-		result = this.manager.createQuery("SELECT COUNT(c) FROM Gerente c WHERE c.login = :login");
+		result = this.manager.createQuery("SELECT COUNT(c) FROM Gerente c WHERE c.login.login = :login");
 		result.setParameter("login", gerente.getLogin());
 		
 		return ((long) result.getSingleResult()) != 0;

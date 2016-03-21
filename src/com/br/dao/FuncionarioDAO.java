@@ -18,7 +18,7 @@ public class FuncionarioDAO extends GenericDAO<Funcionario>{
 	
 	public boolean exist(Funcionario funcionario){
 		Query result = null;
-		result = this.manager.createQuery("SELECT COUNT(c) FROM Funcionario c WHERE c.login = :login");
+		result = this.manager.createQuery("SELECT COUNT(c) FROM Funcionario c WHERE c.login.login = :login");
 		result.setParameter("login", funcionario.getLogin());
 		
 		return ((long) result.getSingleResult()) != 0;

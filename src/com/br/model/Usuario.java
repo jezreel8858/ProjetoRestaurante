@@ -1,6 +1,9 @@
 package com.br.model;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +20,9 @@ public class Usuario implements EntityClass{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(unique = true)
-	private String login;
+	@Embedded
+	private Login login;
 	private String nome;
-	private String senha;
 	private String email;
 	private String telefone;
 	private boolean desativado;
@@ -32,23 +34,21 @@ public class Usuario implements EntityClass{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getLogin() {
+	
+	public void createLogin(String user, String senha) throws NoSuchAlgorithmException{
+		login = new Login();
+		login.setLogin(user);
+		login.criarSenha(senha);
+	}
+	
+	public Login getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public void setLogin(Login login) {
 		this.login = login;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
 	public String getNome() {
 		return nome;
 	}

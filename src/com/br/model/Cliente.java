@@ -1,6 +1,7 @@
 package com.br.model;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Embedded;
@@ -12,7 +13,7 @@ import javax.persistence.TemporalType;
 
 @Entity(name="Cliente")
 @PrimaryKeyJoinColumn(referencedColumnName="id")
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Comparable<Cliente>{
 		
 	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;	
@@ -54,6 +55,10 @@ public class Cliente extends Usuario {
 	}
 	public void setDeliverys(Collection<Delivery> deliverys) {
 		this.deliverys = deliverys;
+	}
+	@Override
+	public int compareTo(Cliente o) {
+		return dataCadastro.compareTo(o.getDataCadastro());
 	}
 	
 }

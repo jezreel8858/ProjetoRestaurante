@@ -6,7 +6,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity(name="Funcionario")
 @PrimaryKeyJoinColumn(referencedColumnName="id")
-public class Funcionario extends Usuario{
+public class Funcionario extends Usuario implements Comparable<Usuario>{
 	
 	@Column(nullable=false)
 	private float salario;
@@ -26,6 +26,10 @@ public class Funcionario extends Usuario{
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	@Override
+	public int compareTo(Usuario o) {
+		return getNome().compareTo(o.getNome());
 	}
 	
 }
