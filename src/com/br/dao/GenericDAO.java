@@ -32,6 +32,7 @@ public abstract class GenericDAO<T extends EntityClass> {
 		manager.remove(entity);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
 		Query query = manager.createQuery("select p from "
 				+ getClassType().getSimpleName() + " p");

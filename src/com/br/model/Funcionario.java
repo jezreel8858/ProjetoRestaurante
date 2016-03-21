@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity
+@Entity(name="Funcionario")
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class Funcionario extends Usuario{
 	

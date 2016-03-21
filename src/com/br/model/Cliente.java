@@ -10,7 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@Entity(name="Cliente")
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class Cliente extends Usuario {
 		

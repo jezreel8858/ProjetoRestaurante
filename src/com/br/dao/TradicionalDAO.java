@@ -14,4 +14,5 @@ public class TradicionalDAO extends GenericDAO<Tradicional> {
 	public Class<Tradicional> getClassType() {
 		return Tradicional.class;
 	}
+	
 }

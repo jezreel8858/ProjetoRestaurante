@@ -6,8 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
-
+@Entity(name="ItemCardapio")
 public class ItemCardapio implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

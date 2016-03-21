@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-@Entity
+@Entity(name="Tradicional")
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class Tradicional extends Pedido {
 	

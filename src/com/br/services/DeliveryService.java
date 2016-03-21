@@ -1,9 +1,11 @@
 package com.br.services;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.br.dao.DeliveryDAO;
 import com.br.dao.ItemCardapioDAO;
@@ -124,6 +126,32 @@ public class DeliveryService {
 			manager.close();
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Object[]> relatorioPorIntervaloData(Date dataI,Date dataF){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		Query result = null;
+		List<Object[]> lista = null;
+		try{
+			result = manager.createQuery("SELECT d.cliente.nome,d.data,SUM(i.qtd * i.cardapio.preco) FROM Delivery d inner join d.itensCardapio i"
+										+ " where d.status = 'Atendido' and d.data between :dataI and :dataF  group by d.cliente.nome,d.data");
+			result.setParameter("dataI", dataI);
+			result.setParameter("dataF", dataF);
+			lista =  result.getResultList();
+			for (Object[] object : lista) {
+				for (Object object2 : object) {
+					System.out.println(object2);
+				}
+			}
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			manager.close();
+		}
+		return lista;
 	}
 
 }

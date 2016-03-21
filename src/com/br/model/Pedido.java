@@ -34,7 +34,7 @@ public class Pedido implements EntityClass{
 	private Funcionario funcionario;
 	
 	@OneToMany(mappedBy="pedido", fetch=FetchType.EAGER)
-	private List<ItemCardapio> itemCardapios = new ArrayList<>();
+	private List<ItemCardapio> itensCardapio = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -55,10 +55,10 @@ public class Pedido implements EntityClass{
 		this.data = data;
 	}
 	public List<ItemCardapio> getItemCardapios() {
-		return itemCardapios;
+		return itensCardapio;
 	}
 	public void setItemCardapios(List<ItemCardapio> itemCardapios) {
-		this.itemCardapios = itemCardapios;
+		this.itensCardapio = itemCardapios;
 	}	
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -71,11 +71,11 @@ public class Pedido implements EntityClass{
 		itemCardapio.setQtd(qtd);
 		itemCardapio.setCardapio(cardapio);
 		itemCardapio.setPedido(this);
-		itemCardapios.add(itemCardapio);
+		itensCardapio.add(itemCardapio);
 	}
 	public float getTotal(){
 		float totalResult = 0;
-		for (ItemCardapio itemCardapio : itemCardapios) {
+		for (ItemCardapio itemCardapio : itensCardapio) {
 			totalResult += itemCardapio.getSubTotal();
 		}
 		return totalResult;
@@ -84,7 +84,7 @@ public class Pedido implements EntityClass{
 	@Override
 	public String toString() {
 		return "Pedido [id=" + id + ", data=" + data + ", status=" + status + ", funcionario=" + funcionario
-				+ ", "+ itemCardapios + "]";
+				+ ", "+ itensCardapio + "]";
 	}
 
 }

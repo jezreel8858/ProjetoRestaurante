@@ -11,16 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@Entity(name="Reserva")
 public class Reserva implements EntityClass{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataReserva;
+	private Date dataInicio;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataMarcada;
+	private Date dataFim;
 	private int nPessoas;			
 	private	String nomeResp;  		
 	
@@ -38,22 +38,6 @@ public class Reserva implements EntityClass{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Date getDataReserva() {
-		return dataReserva;
-	}
-
-	public void setDataReserva(Date dataReserva) {
-		this.dataReserva = dataReserva;
-	}
-
-	public Date getDataMarcada() {
-		return dataMarcada;
-	}
-
-	public void setDataMarcada(Date dataMarcada) {
-		this.dataMarcada = dataMarcada;
 	}
 
 	public int getnPessoas() {
@@ -86,6 +70,22 @@ public class Reserva implements EntityClass{
 
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
+	}
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
 	}
 	
 	

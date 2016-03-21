@@ -1,9 +1,11 @@
 package com.br.services;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.br.dao.ItemCardapioDAO;
 import com.br.dao.TradicionalDAO;
@@ -72,11 +74,7 @@ public class TradicionalService {
 		
 		try{
 			TradicionalDAO pedidoDAO = new TradicionalDAO(manager);
-//			ItemCardapioDAO ItemCardapioDAO = new ItemCardapioDAO(manager);
-			
-//			for(ItemCardapio ItemCardapio:pedido.getItemCardapios()){
-//				ItemCardapioDAO.delete(ItemCardapio);
-//			}
+
 			pedido.setStatus("Cancelado");
 			pedidoDAO.update(pedido);
 			manager.getTransaction().begin();
@@ -122,6 +120,32 @@ public class TradicionalService {
 			manager.close();
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Object[]> relatorioPorIntervaloData(Date dataI,Date dataF){
+		EntityManager  manager =  JPAUtil.getEntityManager();
+		Query result = null;
+		List<Object[]> lista = null;
+		try{
+			result = manager.createQuery("SELECT p.data,SUM(i.qtd * i.cardapio.preco) FROM Pedido p inner join p.itensCardapio i"
+										+ " where p.status = 'Atendido' and p.data between :dataI and :dataF  group by p.data");
+			result.setParameter("dataI", dataI);
+			result.setParameter("dataF", dataF);
+			lista =  result.getResultList();
+			for (Object[] object : lista) {
+				for (Object object2 : object) {
+					System.out.println(object2);
+				}
+			}
+			
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		finally{
+			manager.close();
+		}
+		return lista;
 	}
 
 }

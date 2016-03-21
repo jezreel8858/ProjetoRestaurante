@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name="Mesa")
 public class Mesa implements EntityClass{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
